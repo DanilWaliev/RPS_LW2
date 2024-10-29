@@ -8,7 +8,7 @@ using namespace std;
 enum class MenuOptions
 {
 	Exit,
-	FileInput,
+	RandomInput,
 	ManualInput
 };
 
