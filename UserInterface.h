@@ -4,6 +4,7 @@ using namespace std;
 #include <vector>
 #include <iomanip>
 #include <fstream>
+#include "Utils.h"
 
 enum class MenuOptions
 {
@@ -39,7 +40,7 @@ public:
 
 	static int GetVectorSize(void);
 
-	static void ManualFillVector(vector<int> nums);
+	static void ManualFillVector(vector<int>& nums);
 };
 
 class Printer
