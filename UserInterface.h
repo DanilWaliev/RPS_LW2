@@ -1,10 +1,12 @@
+#pragma once
+
 using namespace std;
 
 #include <iostream>
 #include <vector>
 #include <iomanip>
 #include <fstream>
-#include "Utils.h"
+#include "StringUtils.h"
 
 enum class MenuOptions
 {
