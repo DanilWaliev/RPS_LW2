@@ -7,10 +7,6 @@ using namespace std;
 #include <ios>
 #include <vector>
 
-class FileHandler
-{
-public:
-	static bool IsFileNameReserved(string filename);
+bool IsFileNameReserved(string filename);
 
-	static void PrintVectorToFile(vector<int> nums);
-};
+bool IsReadOnly(string fileName);
