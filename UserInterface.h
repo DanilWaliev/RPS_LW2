@@ -47,6 +47,11 @@ public:
 
 class Printer
 {
+	ostream& output;
 public:
-	static void PrintVector(vector<int> nums);
+	Printer();
+
+	Printer(ostream& out);
+
+	void PrintVector(vector<int> nums);
 };

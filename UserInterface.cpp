@@ -120,13 +120,17 @@ void InputHandler::ManualFillVector(vector<int>& nums)
 	}
 }
 
+Printer::Printer() : output(cout) {}
+
+Printer::Printer(ostream& out) : output(out) {}
+
 void Printer::PrintVector(vector<int> nums)
 {
 	for (int i = 0; i < nums.size(); i++)
 	{
-		cout << nums[i];
-		if (i != nums.size() - 1) cout << ", ";	
+		output << nums[i];
+		if (i != nums.size() - 1) output << ", ";
 	}
 
-	cout << "\n";
+	output << "\n";
 }
