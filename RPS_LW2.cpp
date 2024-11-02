@@ -26,11 +26,14 @@ int main()
 			VectorHandler::ManualFillVector(nums);
 			break;
 		case MenuOptions::RandomInput:
+			// Задаем размер вектора
 			nums.resize(VectorHandler::GetVectorSize());
+			// Заполнение вектора случайными числами
 			VectorHandler::RandomFillVector(nums);
 
 			break;
 		case MenuOptions::Exit:
+			// Завершение работы программы
 			return EXIT_SUCCESS;
 		default:
 			cout << "Такого пункта в меню нет!" << endl;
