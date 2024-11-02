@@ -97,27 +97,32 @@ bool InputHandler::Prompt(std::string message)
 	}
 }
 
-int InputHandler::GetVectorSize(void)
+int VectorHandler::GetVectorSize(void)
 {
 	int input{};
 	int maxSize = 15;
 
 	while (true)
 	{
-		input = GetInt("Введите длину массива: ");
+		input = InputHandler::GetInt("Введите длину массива: ");
 		if (input > 0 && input <= maxSize) return input;
 		cout << "Некорректная длина массива!" << endl;
 	}
 }
 
-void InputHandler::ManualFillVector(vector<int>& nums)
+void VectorHandler::ManualFillVector(vector<int>& nums)
 {
 	string promptMessage;
 	for (int i = 0; i < nums.size(); i++)
 	{
 		promptMessage = "Введите " + to_string(i + 1) + " элемент массива: ";
-		nums[i] = GetInt(promptMessage);
+		nums[i] = InputHandler::GetInt(promptMessage);
 	}
+}
+
+void VectorHandler::RandomFillVector(vector<int>& nums)
+{
+	//
 }
 
 Printer::Printer() : output(cout) {}

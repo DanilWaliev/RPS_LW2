@@ -39,10 +39,16 @@ public:
 		string errorMessage = "Некорректный ввод");
 
 	static bool Prompt(std::string message);
+};
 
+class VectorHandler
+{
+public:
 	static int GetVectorSize(void);
 
 	static void ManualFillVector(vector<int>& nums);
+
+	static void RandomFillVector(vector<int>& nums);
 };
 
 class Printer
