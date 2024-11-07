@@ -15,19 +15,19 @@ int main()
 		// Вывод меню на экран
 		menu.Show();
 		// Получаем пункт меню, который выбрал пользователь
-		menu.SetUserChoice();
+		menu.InputUserChoice();
 
 		switch (menu.GetUserChoice())
 		{
 		case MenuOptions::ManualInput:
 			// Задаем размер вектора
-			nums.resize(VectorHandler::GetVectorSize());
+			nums.resize(VectorHandler::InputVectorSize());
 			// Ввод каждого элмента с клавиатуры
 			VectorHandler::ManualFillVector(nums);
 			break;
 		case MenuOptions::RandomInput:
 			// Задаем размер вектора
-			nums.resize(VectorHandler::GetVectorSize());
+			nums.resize(VectorHandler::InputVectorSize());
 			// Заполнение вектора случайными числами
 			VectorHandler::RandomFillVector(nums);
 

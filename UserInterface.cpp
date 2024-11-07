@@ -11,7 +11,7 @@ void Menu::Show(void)
 		<< endl;
 }
 
-void Menu::SetUserChoice(void)
+void Menu::InputUserChoice(void)
 {
 	int input{};
 	while (true)
@@ -97,7 +97,7 @@ bool InputHandler::Prompt(std::string message)
 	}
 }
 
-int VectorHandler::GetVectorSize(void)
+int VectorHandler::InputVectorSize(void)
 {
 	int input{};
 	int maxSize = 15;

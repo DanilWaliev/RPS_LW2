@@ -27,7 +27,7 @@ public:
 	static void Show(void);
 
 	// Запрашивает у пользователя пункт меню и устанавливает значение userChoice
-	void SetUserChoice(void);
+	void InputUserChoice(void);
 
 	// Возвращает значение userChoice
 	MenuOptions GetUserChoice(void);
@@ -63,7 +63,7 @@ class VectorHandler
 {
 public:
 	// Запрашивает у пользователя размер вектора, до тех пор пока ввод не окажется корректным
-	static int GetVectorSize(void);
+	static int InputVectorSize(void);
 
 	// Реализует заполнение вектора с клавиатуры
 	static void ManualFillVector(vector<int>& nums);
