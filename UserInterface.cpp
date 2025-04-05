@@ -34,8 +34,8 @@ MenuOptions Menu::GetUserChoice(void)
 }
 
 int InputHandler::GetInt(
-	string promptMessage = "Введите целочисленное значение: ",
-	string errorMessage = "Некорректный ввод")
+	string promptMessage,
+	string errorMessage)
 {
 	string input;
 
@@ -58,8 +58,8 @@ int InputHandler::GetInt(
 }
 
 string InputHandler::GetWord(
-	string promptMessage = "Введите строку: ",
-	string errorMessage = "Некорректный ввод")
+	string promptMessage,
+	string errorMessage)
 {
 	string input;
 
