@@ -12,8 +12,8 @@ using namespace std;
 enum class MenuOptions
 {
 	Exit,
-	RandomInput,
 	ManualInput,
+	RandomInput,
 	TreeSort
 };
 
