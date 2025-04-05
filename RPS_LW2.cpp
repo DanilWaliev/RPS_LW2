@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "UserInterface.h"
+#include "Sort.h"
 
 int main()
 {
@@ -30,7 +31,10 @@ int main()
 			nums.resize(VectorHandler::InputVectorSize());
 			// Заполнение вектора случайными числами
 			VectorHandler::RandomFillVector(nums);
-
+			break;
+		case MenuOptions::TreeSort:
+			TreeSortUtils::Sort(nums);
+			Printer().PrintVector(nums);
 			break;
 		case MenuOptions::Exit:
 			// Завершение работы программы

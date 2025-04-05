@@ -1,12 +1,14 @@
 using namespace std;
 
 #include "UserInterface.h"
+#include <random>
 
 void Menu::Show(void)
 {
 	cout << " Меню:" << endl
 		<< " 1 - Заполнить массив вручную" << endl
 		<< " 2 - Заполнить массив случайными числами" << endl
+		<< " 3 - Отсортировать массив деревом" << endl
 		<< " 0 - Выйти из программы" << endl
 		<< endl;
 }
@@ -17,7 +19,7 @@ void Menu::InputUserChoice(void)
 	while (true)
 	{
 		input = InputHandler::GetInt("Введите пункт меню: ");
-		if (input >= 0 && input <= 2)
+		if (input >= 0 && input <= 3)
 		{
 			userChoice = static_cast<MenuOptions>(input);
 			return;
@@ -122,7 +124,16 @@ void VectorHandler::ManualFillVector(vector<int>& nums)
 
 void VectorHandler::RandomFillVector(vector<int>& nums)
 {
-	//
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distrib(0, 100); // диапазон можно изменить
+
+	for (int& val : nums)
+	{
+		val = distrib(gen);
+	}
+
+	std::cout << "Массив заполнен случайными числами от 0 до 100." << std::endl;
 }
 
 Printer::Printer() : output(cout) {}

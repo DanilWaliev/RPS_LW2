@@ -13,7 +13,8 @@ enum class MenuOptions
 {
 	Exit,
 	RandomInput,
-	ManualInput
+	ManualInput,
+	TreeSort
 };
 
 // Представляет меню
