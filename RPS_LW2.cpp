@@ -1,11 +1,15 @@
 ﻿using namespace std;
 
 #include <iostream>
+#include <Windows.h>
 #include "UserInterface.h"
 #include "Sort.h"
 
 int main()
 {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
 	// объект меню для работы с ним
 	Menu menu;
 	// вектор, в котором будем хранить числа
