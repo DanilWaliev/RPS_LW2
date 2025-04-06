@@ -14,7 +14,7 @@ int main()
 	Menu menu;
 	// вектор, в котором будем хранить числа
 	vector<int> nums;
-	
+
 	while (true)
 	{
 		// Вывод меню на экран
@@ -37,9 +37,21 @@ int main()
 			VectorHandler::RandomFillVector(nums);
 			break;
 		case MenuOptions::TreeSort:
+			if (nums.empty()) {
+				cout << "Ошибка: массив пуст!" << endl;
+				break;
+			}
 			TreeSortUtils::Sort(nums);
 			Printer().PrintVector(nums);
 			break;
+		case MenuOptions::SaveToFile:
+			// Сохраняем массив в файл
+		{
+			std::string filename = InputHandler::GetWord("Введите имя файла для сохранения: ");
+			VectorHandler::SaveVectorToFile(nums, filename);
+		}
+		break;
+
 		case MenuOptions::Exit:
 			// Завершение работы программы
 			return EXIT_SUCCESS;
@@ -48,4 +60,3 @@ int main()
 		}
 	}
 }
-

@@ -14,7 +14,8 @@ enum class MenuOptions
 	Exit,
 	ManualInput,
 	RandomInput,
-	TreeSort
+	TreeSort,
+	SaveToFile
 };
 
 // Представляет меню
@@ -71,6 +72,8 @@ public:
 
 	// Реализует заполнение вектора случайными числами
 	static void RandomFillVector(vector<int>& nums);
+	// Сохраняет вектор в указанный файл
+	static void SaveVectorToFile(const vector<int>& nums, const string& filename);
 };
 
 // Для работы с выводом вектора
