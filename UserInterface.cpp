@@ -2,6 +2,9 @@ using namespace std;
 
 #include "UserInterface.h"
 #include <random>
+#include <filesystem>
+#include <algorithm> // для transform
+#include <string> // для string
 
 void Menu::Show(void)
 {
@@ -9,6 +12,7 @@ void Menu::Show(void)
 		<< " 1 - Заполнить массив вручную" << endl
 		<< " 2 - Заполнить массив случайными числами" << endl
 		<< " 3 - Отсортировать массив деревом" << endl
+		<< " 4 - Сохранить массив в файл" << endl  
 		<< " 0 - Выйти из программы" << endl
 		<< endl;
 }
@@ -19,7 +23,7 @@ void Menu::InputUserChoice(void)
 	while (true)
 	{
 		input = InputHandler::GetInt("Введите пункт меню: ");
-		if (input >= 0 && input <= 3)
+		if (input >= 0 && input <= 4)
 		{
 			userChoice = static_cast<MenuOptions>(input);
 			return;
@@ -138,6 +142,40 @@ void VectorHandler::RandomFillVector(vector<int>& nums)
 	Printer().PrintVector(nums);
 }
 
+void VectorHandler::SaveVectorToFile(const std::vector<int>& nums, const std::string& filename)
+{
+	std::string fileToSave = filename;
+
+	// Проверяем существует ли файл
+	if (std::filesystem::exists(fileToSave)) {
+		// Запрашиваем у пользователя, что делать, если файл существует
+		std::string userChoice;
+		std::cout << "Файл \"" << filename << "\" уже существует. Хотите перезаписать? (да/нет): ";
+		std::cin >> userChoice;
+
+		// Приводим ввод к нижнему регистру для независимости от регистра
+		std::transform(userChoice.begin(), userChoice.end(), userChoice.begin(), ::tolower);
+
+		if (userChoice == "нет") {
+			// Если пользователь не хочет перезаписывать, просим ввести новое имя файла
+			std::cout << "Введите новое имя файла: ";
+			std::cin >> fileToSave;
+		}
+	}
+	// Сохраняем массив в файл
+	std::ofstream file(fileToSave);
+
+	if (file.is_open()) {
+		for (int num : nums) {
+			file << num << " ";  // Сохраняем числа через пробел
+		}
+		file.close();
+		std::cout << "Массив успешно сохранён в файл: " << fileToSave << std::endl;
+	}
+	else {
+		std::cout << "Не удалось открыть файл для записи!" << std::endl;
+	}
+}
 Printer::Printer() : output(cout) {}
 
 Printer::Printer(ostream& out) : output(out) {}
