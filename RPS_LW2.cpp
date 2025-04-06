@@ -37,6 +37,10 @@ int main()
 			VectorHandler::RandomFillVector(nums);
 			break;
 		case MenuOptions::TreeSort:
+			if (nums.empty()) {
+				cout << "Ошибка: массив пуст!" << endl;
+				break;
+			}
 			TreeSortUtils::Sort(nums);
 			Printer().PrintVector(nums);
 			break;

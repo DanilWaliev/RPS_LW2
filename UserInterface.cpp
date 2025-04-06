@@ -1,5 +1,6 @@
 using namespace std;
 
+#include "FileUtils.h"
 #include "UserInterface.h"
 #include <random>
 #include <filesystem>
@@ -162,6 +163,11 @@ void VectorHandler::SaveVectorToFile(const std::vector<int>& nums, const std::st
 			std::cin >> fileToSave;
 		}
 	}
+	if (IsReadOnly(fileToSave)) {
+		std::cout << "Ошибка: файл доступен только для чтения!" << std::endl;
+		return; // Прерываем сохранение
+	}
+	std::filesystem::path absolutePath = std::filesystem::absolute(fileToSave);
 	// Сохраняем массив в файл
 	std::ofstream file(fileToSave);
 
@@ -170,10 +176,9 @@ void VectorHandler::SaveVectorToFile(const std::vector<int>& nums, const std::st
 			file << num << " ";  // Сохраняем числа через пробел
 		}
 		file.close();
-		std::cout << "Массив успешно сохранён в файл: " << fileToSave << std::endl;
-	}
-	else {
-		std::cout << "Не удалось открыть файл для записи!" << std::endl;
+		// Выводим информативное сообщение с путём
+		std::cout << "Файл успешно сохранён по пути:\n";
+		std::cout << absolutePath.string() << "\n";
 	}
 }
 Printer::Printer() : output(cout) {}
