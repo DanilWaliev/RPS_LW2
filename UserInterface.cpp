@@ -126,14 +126,16 @@ void VectorHandler::RandomFillVector(vector<int>& nums)
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distrib(0, 100); // диапазон можно изменить
+	std::uniform_int_distribution<> distrib(0, 100); 
 
 	for (int& val : nums)
 	{
 		val = distrib(gen);
 	}
-
+	// Выводим сгенерированный массив
 	std::cout << "Массив заполнен случайными числами от 0 до 100." << std::endl;
+
+	Printer().PrintVector(nums);
 }
 
 Printer::Printer() : output(cout) {}
