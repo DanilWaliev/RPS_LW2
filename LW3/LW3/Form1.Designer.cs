@@ -32,37 +32,39 @@
             input = new TextBox();
             line = new Label();
             DBHeader = new Label();
-            listBox1 = new ListBox();
+            arrays = new ListBox();
             save = new Button();
             sort = new Button();
             delete = new Button();
             button1 = new Button();
+            name = new TextBox();
+            nameHeader = new Label();
             SuspendLayout();
             // 
             // inputHeader
             // 
             inputHeader.AutoSize = true;
             inputHeader.Font = new Font("Segoe UI", 12F);
-            inputHeader.Location = new Point(16, 13);
+            inputHeader.Location = new Point(12, 77);
             inputHeader.Margin = new Padding(4, 0, 4, 0);
             inputHeader.Name = "inputHeader";
-            inputHeader.Size = new Size(255, 28);
+            inputHeader.Size = new Size(200, 21);
             inputHeader.TabIndex = 0;
             inputHeader.Text = "Ввести / Изменить массив:";
             // 
             // input
             // 
             input.Font = new Font("Segoe UI", 12F);
-            input.Location = new Point(13, 45);
+            input.Location = new Point(12, 103);
             input.Margin = new Padding(4);
             input.Name = "input";
-            input.Size = new Size(1021, 34);
+            input.Size = new Size(843, 29);
             input.TabIndex = 1;
             // 
             // line
             // 
             line.BorderStyle = BorderStyle.Fixed3D;
-            line.Location = new Point(12, 149);
+            line.Location = new Point(2, 154);
             line.Margin = new Padding(3, 20, 3, 20);
             line.Name = "line";
             line.Size = new Size(1022, 2);
@@ -72,27 +74,28 @@
             // DBHeader
             // 
             DBHeader.AutoSize = true;
-            DBHeader.Location = new Point(16, 171);
+            DBHeader.Location = new Point(16, 176);
             DBHeader.Name = "DBHeader";
-            DBHeader.Size = new Size(129, 28);
+            DBHeader.Size = new Size(102, 21);
             DBHeader.TabIndex = 3;
             DBHeader.Text = "База данных:";
             DBHeader.Click += DBHeader_Click;
             // 
-            // listBox1
+            // arrays
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 28;
-            listBox1.Location = new Point(16, 202);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(842, 424);
-            listBox1.TabIndex = 4;
+            arrays.FormattingEnabled = true;
+            arrays.ItemHeight = 21;
+            arrays.Location = new Point(16, 202);
+            arrays.Name = "arrays";
+            arrays.Size = new Size(842, 424);
+            arrays.TabIndex = 4;
+            arrays.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // save
             // 
-            save.Location = new Point(12, 86);
+            save.Location = new Point(862, 102);
             save.Name = "save";
-            save.Size = new Size(171, 40);
+            save.Size = new Size(171, 29);
             save.TabIndex = 5;
             save.Text = "Сохранить";
             save.UseVisualStyleBackColor = true;
@@ -100,9 +103,9 @@
             // 
             // sort
             // 
-            sort.Location = new Point(189, 86);
+            sort.Location = new Point(863, 45);
             sort.Name = "sort";
-            sort.Size = new Size(171, 40);
+            sort.Size = new Size(171, 29);
             sort.TabIndex = 6;
             sort.Text = "Отсортировать";
             sort.UseVisualStyleBackColor = true;
@@ -110,32 +113,51 @@
             // 
             // delete
             // 
-            delete.Location = new Point(864, 202);
+            delete.Location = new Point(862, 202);
             delete.Name = "delete";
-            delete.Size = new Size(171, 40);
+            delete.Size = new Size(171, 29);
             delete.TabIndex = 7;
             delete.Text = "Удалить";
             delete.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            button1.Location = new Point(864, 248);
+            button1.Location = new Point(862, 237);
             button1.Name = "button1";
-            button1.Size = new Size(171, 40);
+            button1.Size = new Size(171, 29);
             button1.TabIndex = 8;
             button1.Text = "Изменить";
             button1.UseVisualStyleBackColor = true;
             // 
+            // name
+            // 
+            name.Location = new Point(12, 45);
+            name.Name = "name";
+            name.Size = new Size(844, 29);
+            name.TabIndex = 9;
+            name.TextChanged += textBox1_TextChanged;
+            // 
+            // nameHeader
+            // 
+            nameHeader.AutoSize = true;
+            nameHeader.Location = new Point(12, 9);
+            nameHeader.Name = "nameHeader";
+            nameHeader.Size = new Size(143, 21);
+            nameHeader.TabIndex = 10;
+            nameHeader.Text = "Название массива:";
+            // 
             // mainForm
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1047, 630);
+            Controls.Add(nameHeader);
+            Controls.Add(name);
             Controls.Add(button1);
             Controls.Add(delete);
             Controls.Add(sort);
             Controls.Add(save);
-            Controls.Add(listBox1);
+            Controls.Add(arrays);
             Controls.Add(DBHeader);
             Controls.Add(line);
             Controls.Add(input);
@@ -155,10 +177,12 @@
         private TextBox input;
         private Label line;
         private Label DBHeader;
-        private ListBox listBox1;
+        private ListBox arrays;
         private Button save;
         private Button sort;
         private Button delete;
         private Button button1;
+        private TextBox name;
+        private Label nameHeader;
     }
 }
