@@ -44,6 +44,14 @@ int main()
 			TreeSortUtils::Sort(nums);
 			Printer().PrintVector(nums);
 			break;
+		case MenuOptions::SaveToFile:
+			// Сохраняем массив в файл
+		{
+			std::string filename = InputHandler::GetWord("Введите имя файла для сохранения: ");
+			VectorHandler::SaveVectorToFile(nums, filename);
+		}
+		break;
+
 		case MenuOptions::Exit:
 			// Завершение работы программы
 			return EXIT_SUCCESS;
