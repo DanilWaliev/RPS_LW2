@@ -24,6 +24,22 @@ public class ArrayRepository : IDisposable
         return db.GetCollection<ArrayData>("arrays").FindAll();
     }
 
+    public ArrayData GetArrayByName(string name)
+    {
+        CheckDisposed();
+
+        // Ищем массив
+        var array = db.GetCollection<ArrayData>("arrays")
+            .FindOne(arr => arr.Name == name);
+
+        if (array == null)
+        {
+            throw new Exception($"Массив с именем '{name}' не найден");
+        }
+
+        return array;
+    }
+
     public void DeleteArray(string name)
     {
         CheckDisposed();
