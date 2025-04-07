@@ -1,43 +1,49 @@
 ﻿using LiteDB;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
-public class ArrayRepository
+public class ArrayRepository : IDisposable
 {
-    // Путь до БД
-    private readonly string databasePath;
+    private readonly LiteDatabase db;
+    private bool disposed;
 
     public ArrayRepository(string databasePath)
     {
-        this.databasePath = databasePath;
+        db = new LiteDatabase(databasePath);
     }
 
-    // Добавляет массив в БД
     public void AddArray(ArrayData arrayData)
     {
-        using (var db = new LiteDatabase(databasePath))
-        {
-            var collection = db.GetCollection<ArrayData>("arrays");
-            collection.Insert(arrayData);
-        }
+        CheckDisposed();
+        db.GetCollection<ArrayData>("arrays").Insert(arrayData);
     }
 
-    // Возаращает все массивы из БД
     public IEnumerable<ArrayData> GetAllArrays()
     {
-        using (var db = new LiteDatabase(databasePath))
+        CheckDisposed();
+        return db.GetCollection<ArrayData>("arrays").FindAll();
+    }
+
+    public void DeleteArray(string name)
+    {
+        CheckDisposed();
+        db.GetCollection<ArrayData>("arrays").DeleteMany(arr => arr.Name == name);
+    }
+
+    private void CheckDisposed()
+    {
+        if (disposed)
         {
-            return db.GetCollection<ArrayData>("arrays").FindAll().ToList();
+            throw new ObjectDisposedException(nameof(ArrayRepository));
         }
     }
 
-    // Удаление по имени
-    public void DeleteArray(string arrayName)
+    public void Dispose()
     {
-        using (var db = new LiteDatabase(databasePath))
+        if (!disposed)
         {
-            var collection = db.GetCollection<ArrayData>("arrays");
-            collection.DeleteMany(x => x.Name == arrayName);
+            db.Dispose();
+            disposed = true;
         }
     }
 }
