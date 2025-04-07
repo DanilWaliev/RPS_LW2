@@ -129,17 +129,26 @@ void VectorHandler::ManualFillVector(vector<int>& nums)
 
 void VectorHandler::RandomFillVector(vector<int>& nums)
 {
+	// Получаем минимальное и максимальное значения от пользователя
+	int minValue = InputHandler::GetInt("Введите минимальное значение для генерации: ");
+	int maxValue = InputHandler::GetInt("Введите максимальное значение для генерации: ");
+
+	// Проверка: min не должен быть больше max
+	while (minValue > maxValue) {
+		std::cout << "Ошибка: минимальное значение больше максимального. Повторите ввод." << std::endl;
+		minValue = InputHandler::GetInt("Введите минимальное значение для генерации: ");
+		maxValue = InputHandler::GetInt("Введите максимальное значение для генерации: ");
+	}
+
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distrib(0, 100); 
+	std::uniform_int_distribution<> distrib(minValue, maxValue); // диапазон по выбору пользователя
 
-	for (int& val : nums)
-	{
+	for (int& val : nums) {
 		val = distrib(gen);
 	}
 
-	std::cout << "Массив заполнен случайными числами от 0 до 100." << std::endl;
-	// Выводим сгенерированный массив
+	std::cout << "Массив заполнен случайными числами от " << minValue << " до " << maxValue << "." << std::endl;
 	Printer().PrintVector(nums);
 }
 
