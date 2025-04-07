@@ -6,7 +6,7 @@
 
     public ArrayData()
     {
-        Array = new int[Size]; // Теперь Size доступен
+        Array = new int[Size];
     }
 
     public ArrayData(string name, int[] array)

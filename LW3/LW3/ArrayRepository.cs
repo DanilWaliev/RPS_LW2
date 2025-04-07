@@ -1,61 +1,43 @@
 ﻿using LiteDB;
+using System.Collections.Generic;
+using System.Linq;
 
 public class ArrayRepository
 {
-    private readonly string _databasePath;
+    // Путь до БД
+    private readonly string databasePath;
 
     public ArrayRepository(string databasePath)
     {
-        _databasePath = databasePath;
+        this.databasePath = databasePath;
     }
 
-    // Добавление нового массива
+    // Добавляет массив в БД
     public void AddArray(ArrayData arrayData)
     {
-        using (var db = new LiteDatabase(_databasePath))
+        using (var db = new LiteDatabase(databasePath))
         {
             var collection = db.GetCollection<ArrayData>("arrays");
             collection.Insert(arrayData);
         }
     }
 
-    // Получение всех массивов
+    // Возаращает все массивы из БД
     public IEnumerable<ArrayData> GetAllArrays()
     {
-        using (var db = new LiteDatabase(_databasePath))
+        using (var db = new LiteDatabase(databasePath))
         {
-            var collection = db.GetCollection<ArrayData>("arrays");
-            return collection.FindAll().ToList();
+            return db.GetCollection<ArrayData>("arrays").FindAll().ToList();
         }
     }
 
-    // Получение массива по ID
-    public ArrayData GetArrayById(int id)
+    // Удаление по имени
+    public void DeleteArray(string arrayName)
     {
-        using (var db = new LiteDatabase(_databasePath))
+        using (var db = new LiteDatabase(databasePath))
         {
             var collection = db.GetCollection<ArrayData>("arrays");
-            return collection.FindById(id);
-        }
-    }
-
-    // Обновление массива
-    public void UpdateArray(ArrayData arrayData)
-    {
-        using (var db = new LiteDatabase(_databasePath))
-        {
-            var collection = db.GetCollection<ArrayData>("arrays");
-            collection.Update(arrayData);
-        }
-    }
-
-    // Удаление массива
-    public void DeleteArray(int id)
-    {
-        using (var db = new LiteDatabase(_databasePath))
-        {
-            var collection = db.GetCollection<ArrayData>("arrays");
-            collection.Delete(id);
+            collection.DeleteMany(x => x.Name == arrayName);
         }
     }
 }

@@ -28,17 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             inputHeader = new Label();
             input = new TextBox();
             line = new Label();
             DBHeader = new Label();
-            arrays = new ListBox();
             save = new Button();
             sort = new Button();
             delete = new Button();
-            button1 = new Button();
+            unload = new Button();
             name = new TextBox();
             nameHeader = new Label();
+            arrayDataBindingSource = new BindingSource(components);
+            arrays = new DataGridView();
+            arrayName = new DataGridViewTextBoxColumn();
+            arraySize = new DataGridViewTextBoxColumn();
+            arrayElements = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)arrayDataBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)arrays).BeginInit();
             SuspendLayout();
             // 
             // inputHeader
@@ -48,7 +57,7 @@
             inputHeader.Location = new Point(12, 77);
             inputHeader.Margin = new Padding(4, 0, 4, 0);
             inputHeader.Name = "inputHeader";
-            inputHeader.Size = new Size(200, 21);
+            inputHeader.Size = new Size(255, 28);
             inputHeader.TabIndex = 0;
             inputHeader.Text = "Ввести / Изменить массив:";
             // 
@@ -58,7 +67,8 @@
             input.Location = new Point(12, 103);
             input.Margin = new Padding(4);
             input.Name = "input";
-            input.Size = new Size(843, 29);
+            input.PlaceholderText = "Введите элементы массива через запятую";
+            input.Size = new Size(843, 34);
             input.TabIndex = 1;
             // 
             // line
@@ -69,33 +79,21 @@
             line.Name = "line";
             line.Size = new Size(1022, 2);
             line.TabIndex = 2;
-            line.Click += line_Click;
             // 
             // DBHeader
             // 
             DBHeader.AutoSize = true;
             DBHeader.Location = new Point(16, 176);
             DBHeader.Name = "DBHeader";
-            DBHeader.Size = new Size(102, 21);
+            DBHeader.Size = new Size(129, 28);
             DBHeader.TabIndex = 3;
             DBHeader.Text = "База данных:";
-            DBHeader.Click += DBHeader_Click;
-            // 
-            // arrays
-            // 
-            arrays.FormattingEnabled = true;
-            arrays.ItemHeight = 21;
-            arrays.Location = new Point(16, 202);
-            arrays.Name = "arrays";
-            arrays.Size = new Size(842, 424);
-            arrays.TabIndex = 4;
-            arrays.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // save
             // 
-            save.Location = new Point(862, 102);
+            save.Location = new Point(864, 45);
             save.Name = "save";
-            save.Size = new Size(171, 29);
+            save.Size = new Size(171, 35);
             save.TabIndex = 5;
             save.Text = "Сохранить";
             save.UseVisualStyleBackColor = true;
@@ -103,9 +101,9 @@
             // 
             // sort
             // 
-            sort.Location = new Point(863, 45);
+            sort.Location = new Point(864, 103);
             sort.Name = "sort";
-            sort.Size = new Size(171, 29);
+            sort.Size = new Size(171, 34);
             sort.TabIndex = 6;
             sort.Text = "Отсортировать";
             sort.UseVisualStyleBackColor = true;
@@ -113,51 +111,113 @@
             // 
             // delete
             // 
-            delete.Location = new Point(862, 202);
+            delete.Location = new Point(864, 202);
             delete.Name = "delete";
-            delete.Size = new Size(171, 29);
+            delete.Size = new Size(171, 39);
             delete.TabIndex = 7;
             delete.Text = "Удалить";
             delete.UseVisualStyleBackColor = true;
+            delete.Click += delete_Click;
             // 
-            // button1
+            // unload
             // 
-            button1.Location = new Point(862, 237);
-            button1.Name = "button1";
-            button1.Size = new Size(171, 29);
-            button1.TabIndex = 8;
-            button1.Text = "Изменить";
-            button1.UseVisualStyleBackColor = true;
+            unload.Location = new Point(864, 247);
+            unload.Name = "unload";
+            unload.Size = new Size(171, 39);
+            unload.TabIndex = 8;
+            unload.Text = "Выгрузить";
+            unload.UseVisualStyleBackColor = true;
+            unload.Click += unload_Click;
             // 
             // name
             // 
             name.Location = new Point(12, 45);
             name.Name = "name";
-            name.Size = new Size(844, 29);
+            name.PlaceholderText = "Введите название массива";
+            name.Size = new Size(844, 34);
             name.TabIndex = 9;
-            name.TextChanged += textBox1_TextChanged;
             // 
             // nameHeader
             // 
             nameHeader.AutoSize = true;
             nameHeader.Location = new Point(12, 9);
             nameHeader.Name = "nameHeader";
-            nameHeader.Size = new Size(143, 21);
+            nameHeader.Size = new Size(184, 28);
             nameHeader.TabIndex = 10;
             nameHeader.Text = "Название массива:";
             // 
+            // arrayDataBindingSource
+            // 
+            arrayDataBindingSource.DataSource = typeof(ArrayData);
+            // 
+            // arrays
+            // 
+            arrays.AllowUserToAddRows = false;
+            arrays.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Control;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            arrays.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            arrays.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            arrays.Columns.AddRange(new DataGridViewColumn[] { arrayName, arraySize, arrayElements });
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Window;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            arrays.DefaultCellStyle = dataGridViewCellStyle6;
+            arrays.Location = new Point(12, 207);
+            arrays.MultiSelect = false;
+            arrays.Name = "arrays";
+            arrays.ReadOnly = true;
+            arrays.RowHeadersWidth = 51;
+            arrays.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            arrays.Size = new Size(843, 411);
+            arrays.TabIndex = 11;
+            arrays.CellContentClick += arrays_CellContentClick;
+            // 
+            // arrayName
+            // 
+            arrayName.HeaderText = "Название";
+            arrayName.MinimumWidth = 6;
+            arrayName.Name = "arrayName";
+            arrayName.ReadOnly = true;
+            arrayName.Width = 125;
+            // 
+            // arraySize
+            // 
+            arraySize.HeaderText = "Размер";
+            arraySize.MinimumWidth = 6;
+            arraySize.Name = "arraySize";
+            arraySize.ReadOnly = true;
+            arraySize.Width = 125;
+            // 
+            // arrayElements
+            // 
+            arrayElements.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            arrayElements.HeaderText = "Элементы массива";
+            arrayElements.MinimumWidth = 6;
+            arrayElements.Name = "arrayElements";
+            arrayElements.ReadOnly = true;
+            // 
             // mainForm
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1047, 630);
+            Controls.Add(arrays);
             Controls.Add(nameHeader);
             Controls.Add(name);
-            Controls.Add(button1);
+            Controls.Add(unload);
             Controls.Add(delete);
             Controls.Add(sort);
             Controls.Add(save);
-            Controls.Add(arrays);
             Controls.Add(DBHeader);
             Controls.Add(line);
             Controls.Add(input);
@@ -166,7 +226,8 @@
             Margin = new Padding(4);
             Name = "mainForm";
             Text = "Сортировка массивов";
-            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)arrayDataBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)arrays).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -177,12 +238,16 @@
         private TextBox input;
         private Label line;
         private Label DBHeader;
-        private ListBox arrays;
         private Button save;
         private Button sort;
         private Button delete;
-        private Button button1;
+        private Button unload;
         private TextBox name;
         private Label nameHeader;
+        private BindingSource arrayDataBindingSource;
+        private DataGridView arrays;
+        private DataGridViewTextBoxColumn arrayName;
+        private DataGridViewTextBoxColumn arraySize;
+        private DataGridViewTextBoxColumn arrayElements;
     }
 }
